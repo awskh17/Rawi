@@ -26,6 +26,15 @@ builder.Services.AddScoped<IStoryService, StoryService>();
 builder.Services.AddHttpClient();  // ≈÷«›… HttpClient ≈·Ï DI
 builder.Services.AddSingleton<VoiceRssTtsService>();  // ≈÷«›… VoiceRssTtsService
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins", policy =>
+    {
+        policy.AllowAnyOrigin()  // «·”„«Õ »ﬂ· «·‰ÿ«ﬁ« 
+              .AllowAnyHeader()  // «·”„«Õ »ﬂ· —ƒÊ” «·ÿ·»
+              .AllowAnyMethod(); // «·”„«Õ »ﬂ· √‰Ê«⁄ «·ÿ·»«  (GET, POST, PUT, DELETE)
+    });
+});
 
 var app = builder.Build();
 
@@ -38,11 +47,18 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API v1");
     });
 }
+if (!builder.Environment.IsDevelopment())
+{
+    builder.WebHost.ConfigureKestrel(options =>
+    {
+        options.ListenAnyIP(8080);
+    });
+}
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseMiddleware<CultureInfoManager>();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
