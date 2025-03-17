@@ -66,7 +66,7 @@ app.UseMiddleware<CultureInfoManager>();
 
 // ? Disable HTTPS redirection since Render handles it externally
 // app.UseHttpsRedirection();
-
+app.UseCors("AllowAllOrigins");
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
