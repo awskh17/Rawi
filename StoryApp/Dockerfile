@@ -7,8 +7,8 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
 # نسخ ملفات المشروع واستعادة الحزم
-COPY ["StoryApp.csproj", "./"]
-RUN dotnet restore "./StoryApp.csproj"
+COPY ["program.csproj", "./"]
+RUN dotnet restore "./program.csproj"
 
 # نسخ بقية الملفات وبناء المشروع
 COPY . .
