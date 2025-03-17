@@ -5,16 +5,19 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>4bdecd8d-e97e-49cd-bb41-356912ca5bd5</UserSecretsId>
+    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="C:\Users\AWS\Downloads\StoryApp-master\Rawi\StoryApp\Dockerfile" Link="Dockerfile" />
+    <Compile Include="Dockerfile" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.11.0" />
 	<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
 	<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
 	<PackageReference Include="System.Speech" Version="9.0.3" />
 	<PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
