@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Globalization;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using StoryApp.Models;
 using StoryApp.Service.Abstract;
-using System.Globalization;
 using ControllerBase = Microsoft.AspNetCore.Mvc.ControllerBase;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
@@ -10,6 +11,7 @@ namespace StoryApp.Controllers;
 
 [ApiController]
 [Route("[Controller]")]
+[EnableCors("AllowAllOrigins")]
 public class StoryController : ControllerBase
 {
     private readonly IStoryService _storyService;
