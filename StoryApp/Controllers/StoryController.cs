@@ -30,9 +30,10 @@ public class StoryController : ControllerBase
     }
 
     [HttpPost("summary-story")]
-    public async Task<GenericModel<string>> SummaryString([FromBody] GenericModel<string> model)
+    public async Task<GenericModelSummary<string, string>> SummaryString([FromBody] GenericModel<string> model)
     {
         string story = await _storyService.SummaryStory(model.Data);
-        return new GenericModel<string>(story);
+        String lessons = await _storyService.GetLessons(story);
+        return new GenericModelSummary<string, String>(story, lessons);
     }
 }
