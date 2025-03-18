@@ -17,7 +17,7 @@ $"Generate a creative {story.Category} story with {story.NumberOfCharecters} cha
 
     public async Task<string> GetLessons(string story)
     {
-        return await geminiService.MessageGeminiAsync($"give me three lessons from this story {story} . generate all text in {GetLanguage()} language and humanize it and put them like 'lesson1&&lesson2&&lesson3'");
+        return await geminiService.MessageGeminiAsync($"give me three lessons from this story {story} and put them in this syntax '[lesson1$$lesson2$$lesson3]' . generate all text in {GetLanguage()} language and humanize it.");
     }
 
     public async Task<string> SummaryStory(string story)

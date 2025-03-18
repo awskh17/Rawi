@@ -21,6 +21,8 @@ public enum JobEnum
     Firefighter,        // رجل إطفاء
     Pilot,              // طيار
     Actor,              // ممثل
-    Musician            // موسيقي
+    Musician,            // موسيقي
+    rapper,
+    universityStudent,
 }
 
