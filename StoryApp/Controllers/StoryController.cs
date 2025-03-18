@@ -26,14 +26,15 @@ public class StoryController : ControllerBase
     {
         string story = await _storyService.GenerateStoryAsync(input);
         Console.WriteLine(CultureInfo.CurrentCulture.Name);
-        return new GenericModel<string>(story);
+        return new(story);
     }
 
     [HttpPost("summary-story")]
-    public async Task<GenericModelSummary<string, string>> SummaryString([FromBody] GenericModel<string> model)
+    public async Task<GenericModelSummary<string, String[]>> SummaryString([FromBody] GenericModel<string> model)
     {
         string story = await _storyService.SummaryStory(model.Data);
         String lessons = await _storyService.GetLessons(story);
-        return new GenericModelSummary<string, String>(story, lessons);
+        String[] s = lessons.Split("$$");
+        return new(story, s);
     }
 }
