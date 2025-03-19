@@ -1,23 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using StoryApp.Models;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
+using StoryApp.Domain.Models;
 using StoryApp.Service;
 
 namespace StoryApp.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class TextToSpeechController : ControllerBase
+[EnableCors("AllowAllOrigins")]
+public class TextToSpeechController(TtsService ttsService) : ControllerBase
 {
-    private readonly TtsService _ttsService;
-    private readonly IConfiguration configuration;
-
-    public TextToSpeechController(IConfiguration configuration)
-    {
-        // Replace with your actual API key
-        string apiKey = "AIzaSyD3hGvTQ3iYmvEJBrGcZYC6q_E71dLRvxs";
-        _ttsService = new TtsService(apiKey);
-        this.configuration = configuration;
-    }
 
     [HttpPost("synthesize")]
     public async Task<IActionResult> SynthesizeSpeech([FromBody] GenericModel<string> model)
@@ -27,15 +19,7 @@ public class TextToSpeechController : ControllerBase
             return BadRequest("Text is required.");
         }
 
-        var audioData = await _ttsService.SynthesizeSpeechAsync(model.Data);
+        var audioData = await ttsService.SynthesizeSpeechAsync(model.Data);
         return File(audioData, "audio/mpeg", "output.mp3");
     }
-
-    [HttpGet("Gemini")]
-    public string GetGeminiSecrets()
-        => configuration["Keys:GeminiApi"]!;
-
-    [HttpGet("Tts")]
-    public string GetTtsSecrets()
-        => configuration["Keys:TtsApi"]!;
 }

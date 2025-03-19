@@ -1,4 +1,4 @@
-﻿namespace StoryApp.Enums;
+﻿namespace StoryApp.Domain.Enums;
 
 public enum StoryCategory
 {

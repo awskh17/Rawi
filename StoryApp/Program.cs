@@ -1,6 +1,7 @@
 using FluentValidation;
 using Microsoft.OpenApi.Models;
 using StoryApp.ActionFilters;
+using StoryApp.Domain.Options;
 using StoryApp.Middleware;
 using StoryApp.Service;
 using StoryApp.Service.Abstract;
@@ -18,6 +19,11 @@ builder.Services.AddControllers(x =>
 {
     x.Filters.Add<ValidatorActionFilter>();
 });
+
+builder.Services.AddOptions<KeyOptions>()
+    .BindConfiguration(KeyOptions.Key)
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
 
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly, includeInternalTypes: true);
 

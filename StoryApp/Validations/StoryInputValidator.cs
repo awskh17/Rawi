@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using StoryApp.Models;
+using StoryApp.Domain.Models;
 
 namespace StoryApp.Validations;
 

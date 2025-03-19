@@ -1,4 +1,4 @@
-﻿using StoryApp.Models;
+﻿using StoryApp.Domain.Models;
 
 namespace StoryApp.Service.Abstract;
 

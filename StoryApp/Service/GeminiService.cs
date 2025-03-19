@@ -1,21 +1,22 @@
-﻿using StoryApp.Models;
-using StoryApp.Service.Abstract;
-using System.Net.Http.Json;
-using System.Text;
+﻿using System.Text;
 using System.Text.Json;
+using StoryApp.Domain.Models;
+using StoryApp.Service.Abstract;
 
 namespace StoryApp.Service;
 
 public class GeminiService : IGeminiService
 {
-    private readonly string _apiKey = "AIzaSyCv8QaYEJ-VfNeYr3-pNLkZHj91q1cc-tk";
+    private readonly IConfiguration configuration;
+    private readonly string _apiKey;
     private readonly string _apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
     private readonly HttpClient _httpClient;
 
-    public GeminiService()
+    public GeminiService(IConfiguration configuration)
     {
         _httpClient = new HttpClient();
         _httpClient.BaseAddress = new Uri("https://generativelanguage.googleapis.com");
+        _apiKey =
     }
 
     public async Task<string> MessageGeminiAsync(string message)

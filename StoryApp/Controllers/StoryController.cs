@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using StoryApp.Models;
+using StoryApp.Domain.Models;
 using StoryApp.Service.Abstract;
 using ControllerBase = Microsoft.AspNetCore.Mvc.ControllerBase;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;

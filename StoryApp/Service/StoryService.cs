@@ -1,5 +1,5 @@
 ﻿using System.Globalization;
-using StoryApp.Models;
+using StoryApp.Domain.Models;
 using StoryApp.Service.Abstract;
 
 namespace StoryApp.Service;

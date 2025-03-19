@@ -1,6 +1,6 @@
-﻿using StoryApp.Enums;
+﻿using StoryApp.Domain.Enums;
 
-namespace StoryApp.Models;
+namespace StoryApp.Domain.Models;
 
 public record StoryInput
 (

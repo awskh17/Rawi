@@ -1,4 +1,4 @@
-﻿namespace StoryApp.Models;
+﻿namespace StoryApp.Domain.Models;
 
 public record GeminiResponse(
     List<Candidate> Candidates,
