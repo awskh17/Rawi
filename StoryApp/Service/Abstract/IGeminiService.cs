@@ -1,6 +1,6 @@
 ﻿namespace StoryApp.Service.Abstract;
 
-internal interface IGeminiService
+public interface IGeminiService
 {
     Task<string> MessageGeminiAsync(string message);
 }
