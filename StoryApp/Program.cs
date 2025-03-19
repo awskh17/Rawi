@@ -8,10 +8,10 @@ using StoryApp.Service.Abstract;
 var builder = WebApplication.CreateBuilder(args);
 
 // ? Configure Kestrel **before** building the app
-builder.WebHost.ConfigureKestrel(options =>
-{
-    options.ListenAnyIP(8080);  // Set to listen on port 8080
-});
+//builder.WebHost.ConfigureKestrel(options =>
+//{
+//    options.ListenAnyIP(8080);  // Set to listen on port 8080
+//});
 
 // Add services to the container.
 builder.Services.AddControllers(x =>
@@ -28,7 +28,7 @@ builder.Services.AddSwaggerGen(o =>
 
 builder.Services.AddScoped<IStoryService, StoryService>();
 builder.Services.AddHttpClient();
-builder.Services.AddSingleton<VoiceRssTtsService>();
+//builder.Services.AddSingleton<TtsService>();
 
 // ? CORS Configuration
 builder.Services.AddCors(options =>
@@ -52,13 +52,13 @@ if (app.Environment.IsDevelopment())
 }
 
 // ? Remove this because it's already configured above
-// if (!builder.Environment.IsDevelopment())
-// {
-//     builder.WebHost.ConfigureKestrel(options =>
-//     {
-//         options.ListenAnyIP(8080);
-//     });
-// }
+if (!builder.Environment.IsDevelopment())
+{
+    builder.WebHost.ConfigureKestrel(options =>
+    {
+        options.ListenAnyIP(8080);
+    });
+}
 
 // ? Add Custom Middleware
 app.UseMiddleware<ErrorHandlingMiddleware>();

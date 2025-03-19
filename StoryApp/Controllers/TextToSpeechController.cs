@@ -1,30 +1,31 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StoryApp.Models;
 using StoryApp.Service;
 
 namespace StoryApp.Controllers;
 
 [ApiController]
-[Route("[Controller]")]
+[Route("api/[controller]")]
 public class TextToSpeechController : ControllerBase
 {
-    private readonly VoiceRssTtsService _voiceRssTtsService;
+    private readonly TtsService _ttsService;
 
-    public TextToSpeechController(VoiceRssTtsService voiceRssTtsService)
+    public TextToSpeechController()
     {
-        _voiceRssTtsService = voiceRssTtsService;
+        // Replace with your actual API key
+        string apiKey = "AIzaSyD3hGvTQ3iYmvEJBrGcZYC6q_E71dLRvxs";
+        _ttsService = new TtsService(apiKey);
     }
 
-    [HttpPost]
-    public async Task<String> ConvertTextToSpeech(string text)
+    [HttpPost("synthesize")]
+    public async Task<IActionResult> SynthesizeSpeech([FromBody] GenericModel<string> model)
     {
-        //if (string.IsNullOrEmpty(text))
-        //{
-        //    return BadRequest("Text cannot be empty");
-        //}
+        if (string.IsNullOrEmpty(model.Data))
+        {
+            return BadRequest("Text is required.");
+        }
 
-        string audioFilePath = await _voiceRssTtsService.ConvertTextToSpeech(text);
-
-        // إرجاع المسار الصوتي للعرض في الصفحة
-        return audioFilePath;
+        var audioData = await _ttsService.SynthesizeSpeechAsync(model.Data);
+        return File(audioData, "audio/mpeg", "output.mp3");
     }
 }
