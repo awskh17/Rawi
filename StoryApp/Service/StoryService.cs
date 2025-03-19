@@ -4,9 +4,8 @@ using StoryApp.Service.Abstract;
 
 namespace StoryApp.Service;
 
-public class StoryService : IStoryService
+public class StoryService(IGeminiService geminiService) : IStoryService
 {
-    IGeminiService geminiService = new GeminiService();
     public async Task<string> GenerateStoryAsync(StoryInput story)
     {
         var a = GetLanguage();

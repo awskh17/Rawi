@@ -1,23 +1,23 @@
 ﻿using System.Globalization;
 using System.Text;
 using Newtonsoft.Json;
+using StoryApp.Domain.Options;
 
 namespace StoryApp.Service;
 
 public class TtsService
 {
     private readonly HttpClient _httpClient;
-    private readonly string _apiKey;
+    private readonly string _apiUrl;
 
-    public TtsService(string apiKey)
+    public TtsService(KeyOptions options)
     {
         _httpClient = new HttpClient();
-        _apiKey = apiKey;
+        _apiUrl = $"https://texttospeech.googleapis.com/v1/text:synthesize?key={options.TtsApi}";
     }
 
     public async Task<byte[]> SynthesizeSpeechAsync(string text)
     {
-        var url = $"https://texttospeech.googleapis.com/v1/text:synthesize?key={_apiKey}";
 
         string langCode = GetLanguage() == "ar" ? "ar-XA" : "en-US";
         string voiceName = "en-US-Wavenet-D";
@@ -45,7 +45,7 @@ public class TtsService
         var jsonRequest = JsonConvert.SerializeObject(requestBody);
         var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
 
-        var response = await _httpClient.PostAsync(url, content);
+        var response = await _httpClient.PostAsync(_apiUrl, content);
         if (!response.IsSuccessStatusCode)
         {
             throw new Exception("Error calling Google TTS API: " + response.ReasonPhrase);
