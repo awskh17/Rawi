@@ -1,0 +1,15 @@
+﻿jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      Keys__GeminiApi: ${{ secrets.GEMINI_API }}
+      Keys__TtsApi: ${{ secrets.TTS_API }}
+    steps:
+      - name: Check secrets availability
+        run: |
+          if [ -z "$GEMINI_API" ] || [ -z "$TTS_API" ]; then
+            echo "One or more secrets are missing!"
+            exit 1
+          else
+            echo "Secrets are available."
+          fi

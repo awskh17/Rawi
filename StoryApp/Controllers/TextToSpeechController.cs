@@ -9,12 +9,14 @@ namespace StoryApp.Controllers;
 public class TextToSpeechController : ControllerBase
 {
     private readonly TtsService _ttsService;
+    private readonly IConfiguration configuration;
 
-    public TextToSpeechController()
+    public TextToSpeechController(IConfiguration configuration)
     {
         // Replace with your actual API key
         string apiKey = "AIzaSyD3hGvTQ3iYmvEJBrGcZYC6q_E71dLRvxs";
         _ttsService = new TtsService(apiKey);
+        this.configuration = configuration;
     }
 
     [HttpPost("synthesize")]
@@ -28,4 +30,12 @@ public class TextToSpeechController : ControllerBase
         var audioData = await _ttsService.SynthesizeSpeechAsync(model.Data);
         return File(audioData, "audio/mpeg", "output.mp3");
     }
+
+    [HttpGet("Gemini")]
+    public string GetGeminiSecrets()
+        => configuration["Keys:GeminiApi"]!;
+
+    [HttpGet("Tts")]
+    public string GetTtsSecrets()
+        => configuration["Keys:TtsApi"]!;
 }
