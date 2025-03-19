@@ -1,6 +1,8 @@
 ﻿on:
   push:
-    branches:["main"]
+    branches:
+      - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -8,9 +10,12 @@ jobs:
       Keys__GeminiApi: ${{ secrets.GEMINI_API }}
       Keys__TtsApi: ${{ secrets.TTS_API }}
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
       - name: Check secrets availability
         run: |
-          if [ -z "$GEMINI_API" ] || [ -z "$TTS_API" ]; then
+          if [ -z "$Keys__GeminiApi" ] || [ -z "$Keys__TtsApi" ]; then
             echo "One or more secrets are missing!"
             exit 1
           else
