@@ -11,5 +11,6 @@ public record StoryInput
     GenderEnum Gender,
     JobEnum Job,
     int NumberOfCharecters,
-    string NameOfMainCharcter
+    string NameOfMainCharcter,
+    bool Age
 );
