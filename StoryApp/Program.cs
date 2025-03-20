@@ -35,7 +35,7 @@ builder.Services.AddSwaggerGen(o =>
 builder.Services.AddScoped<IStoryService, StoryService>();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<TtsService>();
-//builder.Services.AddSingleton<TtsService>();
+builder.Services.AddScoped<GeminiService>();
 
 // ? CORS Configuration
 builder.Services.AddCors(options =>
