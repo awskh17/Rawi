@@ -4,7 +4,7 @@ using StoryApp.Service.Abstract;
 
 namespace StoryApp.Service;
 
-public class StoryService(GeminiService geminiService) : IStoryService
+public class StoryService(IGeminiService geminiService) : IStoryService
 {
     public async Task<string> GenerateStoryAsync(StoryInput story)
     {

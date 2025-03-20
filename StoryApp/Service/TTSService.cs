@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Text;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using StoryApp.Domain.Options;
 
@@ -10,10 +11,10 @@ public class TtsService
     private readonly HttpClient _httpClient;
     private readonly string _apiUrl;
 
-    public TtsService(KeyOptions options)
+    public TtsService(IOptions<KeyOptions> options)
     {
         _httpClient = new HttpClient();
-        _apiUrl = $"https://texttospeech.googleapis.com/v1/text:synthesize?key={options.TtsApi}";
+        _apiUrl = $"https://texttospeech.googleapis.com/v1/text:synthesize?key={options.Value.TtsApi}";
     }
 
     public async Task<byte[]> SynthesizeSpeechAsync(string text)

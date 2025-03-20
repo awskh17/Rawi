@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Text.Json;
+using Microsoft.Extensions.Options;
 using StoryApp.Domain.Models;
 using StoryApp.Domain.Options;
 using StoryApp.Service.Abstract;
@@ -11,11 +12,11 @@ public class GeminiService : IGeminiService
     private readonly string _apiUrl;
     private readonly HttpClient _httpClient;
 
-    public GeminiService(KeyOptions options)
+    public GeminiService(IOptions<KeyOptions> options)
     {
         _httpClient = new HttpClient();
         _httpClient.BaseAddress = new Uri("https://generativelanguage.googleapis.com");
-        _apiUrl = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={options.GeminiApi}";
+        _apiUrl = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={options.Value.GeminiApi}";
     }
 
     public async Task<string> MessageGeminiAsync(string message)

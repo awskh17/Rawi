@@ -20,10 +20,6 @@ builder.Services.AddControllers(x =>
     x.Filters.Add<ValidatorActionFilter>();
 });
 
-builder.Services.AddOptions<KeyOptions>()
-    .BindConfiguration(KeyOptions.Key)
-    .ValidateDataAnnotations()
-    .ValidateOnStart();
 
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly, includeInternalTypes: true);
 
@@ -32,10 +28,15 @@ builder.Services.AddSwaggerGen(o =>
     o.SwaggerDoc("v1", new OpenApiInfo() { Title = "MyAPI", Version = "v1" });
 });
 
-builder.Services.AddScoped<IStoryService, StoryService>();
 builder.Services.AddHttpClient();
+builder.Services.AddOptions<KeyOptions>()
+    .BindConfiguration(KeyOptions.Key)
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
+
+builder.Services.AddScoped<IGeminiService, GeminiService>();
+builder.Services.AddScoped<IStoryService, StoryService>();
 builder.Services.AddScoped<TtsService>();
-builder.Services.AddScoped<GeminiService>();
 
 // ? CORS Configuration
 builder.Services.AddCors(options =>
