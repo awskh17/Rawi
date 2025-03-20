@@ -20,7 +20,7 @@ public class TtsService
     public async Task<byte[]> SynthesizeSpeechAsync(string text)
     {
 
-        string langCode = GetLanguage() == "ar" ? "ar-XA" : "en-US";
+        string langCode = GetLanguage() == "Arabic" ? "ar-XA" : "en-US";
         string voiceName = "en-US-Wavenet-D";
         if (langCode == "ar")
         {
