@@ -10,7 +10,7 @@ public class StoryService(IGeminiService geminiService) : IStoryService
     {
         var a = GetLanguage();
         return await geminiService.MessageGeminiAsync(
-$"Generate a creative {story.Category} story for {(story.Age ? "child" : "adult")}  with {story.NumberOfCharecters} characters.The main character is {story.NameOfMainCharcter}, a {story.Gender} {story.Job}. The story is set in {story.Setting}.The theme of the story is {story.Theme}. The story should be {story.Length} long, with creative ending, generate all text in {GetLanguage()} language and humanize it and just give me the story without any word such as certainly and remove any unnecessary symbol such as #.");
+$"Generate a creative {story.Category} story for {(story.Age ? "child" : "adult")}  with {story.NumberOfCharecters} characters.The main character is {story.NameOfMainCharcter}, a {story.Gender} {story.Job}. The story is set in {story.Setting}.The theme of the story is {story.Theme}. The story should be {story.Length} long, with creative ending, generate all text in {GetLanguage()} language and humanize it with simple words and just give me the story without any word such as certainly and remove any unnecessary symbol such as #.");
 
     }
 
