@@ -22,7 +22,7 @@ public class TtsService
 
         string langCode = GetLanguage() == "Arabic" ? "ar-XA" : "en-US";
         string voiceName = "en-US-Wavenet-D";
-        if (langCode == "ar")
+        if (langCode == "ar-XA")
         {
             voiceName = "ar-XA-Wavenet-B";
         }
